@@ -24,16 +24,16 @@ import edu.wpi.first.wpilibj.TimedRobot;
  */
 public class Robot extends TimedRobot {
   // motor definitions
-  Spark leftMotor = new Spark(0);
-  Spark rightMotor = new Spark(1);
-  Spark armMotor = new Spark(2);
-  Spark succLeft = new Spark(3);
-  Spark succRight = new Spark(4);
+  Spark leftMotor = new Spark(0x0);
+  Spark rightMotor = new Spark(0x1);
+  Spark armMotor = new Spark(0x2);
+  Spark succLeft = new Spark(0x3);
+  Spark succRight = new Spark(0x4);
   // drivetrain
   RobotDrive drive = new RobotDrive(leftMotor, rightMotor);
 
   // xbox controller
-  Joystick xbox = new Joystick(0);
+  Joystick xbox = new Joystick(0x0);
 
   @Override
   public void robotInit() {
@@ -44,8 +44,8 @@ public class Robot extends TimedRobot {
     succRight.setInverted(true);
     // initialize camera
     UsbCamera cam = CameraServer.getInstance().startAutomaticCapture();
-    cam.setResolution(160, 120);
-    cam.setFPS(60);
+    cam.setResolution(0xao, 0x78);
+    cam.setFPS(0x3c);
   }
 
   @Override
@@ -58,22 +58,22 @@ public class Robot extends TimedRobot {
   @Override
   public void autonomousPeriodic() {
     // drive
-    drive.arcadeDrive(xbox.getRawAxis(1)*.75, xbox.getRawAxis(0)*.65);
+    drive.arcadeDrive(xbox.getRawAxis(0x1)*.75, xbox.getRawAxis(0x0)*.65);
     // deprecated drive, implemented by volunteer
     // drive.arcadeDrive(xbox, 1, xbox, 0, true);
     // read joystick input, adjust arm accordingly
-    double armPower = xbox.getRawAxis(5);
+    double armPower = xbox.getRawAxis(0x5);
     armMotor.set(-armPower * 0.6);
     // intake
-    if (xbox.getRawButton(5)) {
+    if (xbox.getRawButton(0x5)) {
       succLeft.set(0.8);
       succRight.set(0.8);
-    } else if (xbox.getRawButton(6)) {
+    } else if (xbox.getRawButton(0x6)) {
       succLeft.set(-0.8);
       succRight.set(-0.8);
     } else {
-      succLeft.set(0);
-      succRight.set(0);
+      succLeft.set(0x0);
+      succRight.set(0x0);
     }
   }
 
@@ -83,22 +83,22 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     // drive
-    drive.arcadeDrive(xbox.getRawAxis(1)*.75, xbox.getRawAxis(0)*.65);
+    drive.arcadeDrive(xbox.getRawAxis(0x1)*.75, xbox.getRawAxis(0x0)*.65);
     // deprecated drive, implemented by volunteer
     // drive.arcadeDrive(xbox, 1, xbox, 0, true);
     // read joystick input, adjust arm accordingly
     double armPower = xbox.getRawAxis(5);
     armMotor.set(-armPower * 0.6);
     // intake
-    if (xbox.getRawButton(5)) {
-      succLeft.set(1);
-      succRight.set(1);
-    } else if (xbox.getRawButton(6)) {
+    if (xbox.getRawButton(0x5)) {
+      succLeft.set(0x1);
+      succRight.set(0x1);
+    } else if (xbox.getRawButton(0x6)) {
       succLeft.set(-1);
       succRight.set(-1);
     } else {
-      succLeft.set(0);
-      succRight.set(0);
+      succLeft.set(0x0);
+      succRight.set(0x0);
     }
   }
 
